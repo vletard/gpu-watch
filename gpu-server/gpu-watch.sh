@@ -15,7 +15,7 @@ LOGFILE=/run/$NAME.log
 DELAY=1m
 
 function is_gpu_free() {
-  if (( $(nvidia-smi --query-compute-apps=used_memory --format=csv,noheader | wc -l) == 0 ))
+  if (( $(nvidia-smi --query-compute-apps=used_memory --format=csv,noheader | grep -vF "[Not Supported]" | wc -l) == 0 ))
   then
     echo true
   else
