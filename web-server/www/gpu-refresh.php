@@ -6,7 +6,7 @@
     $status=file_get_contents($filename);
     if ($status == "1")
       echo("in use");
-    elseif ($status == "2")
+    elseif ($status == "0")
       echo("free");
     else
       echo($status);
