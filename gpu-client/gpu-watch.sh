@@ -13,6 +13,7 @@ NAME=gpu-watch
 PIDFILE=/run/$NAME.pid
 LOGFILE=/run/$NAME.log
 DELAY=1m
+source /etc/$NAME/config
 
 function is_gpu_free() {
   if (( $(nvidia-smi --query-compute-apps=used_memory --format=csv,noheader | grep -vF "[Not Supported]" | wc -l) == 0 ))
@@ -33,7 +34,7 @@ function notifier_daemon() {
     else
       status=1
     fi
-    request="https://factoriel5.duckdns.org/gpu-update.php?hostname=$(hostname)&status=$status"
+    request="$REMOTE/gpu-update.php?hostname=$(hostname)&status=$status"
     curl -s --max-time 60 $request
     status=$?
     if $(($status != 0))

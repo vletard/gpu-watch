@@ -1,0 +1,2 @@
+# specify your gpu-watch server's address and port
+REMOTE=5.196.69.112:8083
